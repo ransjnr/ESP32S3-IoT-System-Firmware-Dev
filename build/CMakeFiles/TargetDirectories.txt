@@ -876,3 +876,10 @@
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/CMakeFiles/install.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/CMakeFiles/install/local.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/CMakeFiles/install/strip.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/__idf_wifi-imp.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/edit_cache.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/rebuild_cache.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/list_install_components.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/install.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/install/local.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/CMakeFiles/install/strip.dir

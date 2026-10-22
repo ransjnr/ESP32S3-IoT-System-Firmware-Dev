@@ -163,3 +163,5 @@ $<TARGET_FILE:idf::wifi_provisioning>
 $<TARGET_FILE:__idf_json>
 $<TARGET_FILE:idf::main>
 $<TARGET_FILE:idf::test_component>
+$<TARGET_FILE:idf::wifi-imp>
+$<TARGET_FILE:__idf_main>

@@ -1,6 +1,6 @@
 Command: ninja flash
 [1/5] cd /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/esptool_py && /home/r26oppon/.espressif/python_env/idf5.5_py3.14_env/bin/python /home/r26oppon/.espressif/v5.5.6/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/r26oppon/Iot_course/esp32_firmware/build/partition_table/partition-table.bin /home/r26oppon/Iot_course/esp32_firmware/build/esp32_firmware.bin
-esp32_firmware.bin binary size 0x2ed30 bytes. Smallest app partition is 0x100000 bytes. 0xd12d0 bytes (82%) free.
+esp32_firmware.bin binary size 0xb8c80 bytes. Smallest app partition is 0x100000 bytes. 0x47380 bytes (28%) free.
 [2/5] Performing build step for 'bootloader'
 [1/1] cd /home/r26oppon/Iot_course/esp32_firmware/build/bootloader/esp-idf/esptool_py && /home/r26oppon/.espressif/python_env/idf5.5_py3.14_env/bin/python /home/r26oppon/.espressif/v5.5.6/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/r26oppon/Iot_course/esp32_firmware/build/bootloader/bootloader.bin
 Bootloader binary size 0x4ff0 bytes. 0x3010 bytes (38%) free.
@@ -22,26 +22,49 @@ Changing baud rate to 460800
 Changed.
 Configuring flash size...
 Flash will be erased from 0x00000000 to 0x00004fff...
-Flash will be erased from 0x00010000 to 0x0003efff...
+Flash will be erased from 0x00010000 to 0x000c8fff...
 Flash will be erased from 0x00008000 to 0x00008fff...
 SHA digest in image updated
-Compressed 20464 bytes to 13207...
+Compressed 20464 bytes to 13205...
 Writing at 0x00000000... (100 %)
-Wrote 20464 bytes (13207 compressed) at 0x00000000 in 0.5 seconds (effective 339.6 kbit/s)...
+Wrote 20464 bytes (13205 compressed) at 0x00000000 in 0.5 seconds (effective 337.5 kbit/s)...
 Hash of data verified.
-Compressed 191792 bytes to 105430...
-Writing at 0x00010000... (14 %)
-Writing at 0x0001c8f8... (28 %)
-Writing at 0x000229ac... (42 %)
-Writing at 0x000290d2... (57 %)
-Writing at 0x0002fbe0... (71 %)
-Writing at 0x0003594a... (85 %)
-Writing at 0x0003bdda... (100 %)
-Wrote 191792 bytes (105430 compressed) at 0x00010000 in 2.8 seconds (effective 543.4 kbit/s)...
+Compressed 756864 bytes to 477237...
+Writing at 0x00010000... (3 %)
+Writing at 0x0001c5c3... (6 %)
+Writing at 0x0002524c... (10 %)
+Writing at 0x0003070f... (13 %)
+Writing at 0x00036acf... (16 %)
+Writing at 0x0003cf39... (20 %)
+Writing at 0x00042ebe... (23 %)
+Writing at 0x00048e91... (26 %)
+Writing at 0x0004ea13... (30 %)
+Writing at 0x00053d7b... (33 %)
+Writing at 0x00058e0f... (36 %)
+Writing at 0x0005e648... (40 %)
+Writing at 0x00063c85... (43 %)
+Writing at 0x000690c3... (46 %)
+Writing at 0x0006e44d... (50 %)
+Writing at 0x0007397f... (53 %)
+Writing at 0x00079ad2... (56 %)
+Writing at 0x0007f38e... (60 %)
+Writing at 0x00084f46... (63 %)
+Writing at 0x0008ad0c... (66 %)
+Writing at 0x00090794... (70 %)
+Writing at 0x000965f2... (73 %)
+Writing at 0x0009bff3... (76 %)
+Writing at 0x000a17d9... (80 %)
+Writing at 0x000aa277... (83 %)
+Writing at 0x000b0034... (86 %)
+Writing at 0x000b6168... (90 %)
+Writing at 0x000bc38b... (93 %)
+Writing at 0x000c24f7... (96 %)
+Writing at 0x000c7c32... (100 %)
+Wrote 756864 bytes (477237 compressed) at 0x00010000 in 11.9 seconds (effective 508.1 kbit/s)...
 Hash of data verified.
 Compressed 3072 bytes to 103...
 Writing at 0x00008000... (100 %)
-Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.0 seconds (effective 626.8 kbit/s)...
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.0 seconds (effective 629.6 kbit/s)...
 Hash of data verified.
 
 Leaving...

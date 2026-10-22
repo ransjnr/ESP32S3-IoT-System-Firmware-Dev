@@ -577,3 +577,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/cmake_install.cmake")
+endif()
+
