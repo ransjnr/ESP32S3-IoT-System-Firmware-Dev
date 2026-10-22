@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/r26oppon/Iot_course/esp32_firmware/build/CMakeFiles/bootloader
+/home/r26oppon/Iot_course/esp32_firmware/build/CMakeFiles/bootloader.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/CMakeFiles/bootloader-complete.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/r26oppon/Iot_course/esp32_firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

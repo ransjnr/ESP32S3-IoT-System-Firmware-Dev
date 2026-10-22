@@ -1,0 +1,2 @@
+source /home/r26oppon/Iot_course/esp32_firmware/build/bootloader/gdbinit/symbols
+source /home/r26oppon/Iot_course/esp32_firmware/build/bootloader/gdbinit/connect
