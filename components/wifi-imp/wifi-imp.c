@@ -93,9 +93,9 @@ static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_
             ESP_LOGI(TAG, "Retry %d / %d", s_retry_num, WIFI_MAX_RETRIES_PRIV);
             esp_wifi_connect();
         } else {
+            app_set_state(APP_STATE_WIFI_PROVISIONING);
             xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
         }
-
         ESP_LOGI(TAG, "Connection to AP Failed");
     }
     else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP){

@@ -1,0 +1,12 @@
+Command: ninja all
+CMake Error at /home/r26oppon/.espressif/v5.5.6/esp-idf/tools/cmake/build.cmake:332 (message):
+  Failed to resolve component 'wifi_imp' required by component 'http_imp':
+  unknown name.
+Call Stack (most recent call first):
+  /home/r26oppon/.espressif/v5.5.6/esp-idf/tools/cmake/build.cmake:381 (__build_resolve_and_add_req)
+  /home/r26oppon/.espressif/v5.5.6/esp-idf/tools/cmake/build.cmake:704 (__build_expand_requirements)
+  /home/r26oppon/.espressif/v5.5.6/esp-idf/tools/cmake/project.cmake:752 (idf_build_process)
+  CMakeLists.txt:6 (project)
+
+
+ninja: error: rebuilding 'build.ninja': subcommand failed

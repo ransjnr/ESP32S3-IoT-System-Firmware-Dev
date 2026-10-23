@@ -5,6 +5,7 @@
 #include "esp_log.h"
 #include "wifi-imp.h"
 #include "nvs_flash.h"
+#include "http_imp.h"
 
 static const char* TAG = "main";
 
@@ -44,6 +45,8 @@ void app_main(void)
             ESP_LOGI(TAG, "State: WIFI_PROVISIONING");
             start_ap_mode(); // start AP mode so that user can enter the credentials through the web interface
             // start the locally deployed http server to allow the user to enter the credentials through the web interface
+            
+            http_wifi_credentials_server_init();
             app_set_state(APP_STATE_RUNNING);
         case APP_STATE_TELEMETRY_INIT:
             /* code */
