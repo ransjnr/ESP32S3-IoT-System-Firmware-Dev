@@ -6,6 +6,7 @@
 #include "wifi-imp.h"
 #include "nvs_flash.h"
 #include "http_imp.h"
+#include "telemetry.h"
 
 static const char* TAG = "main";
 
@@ -45,13 +46,29 @@ void app_main(void)
             ESP_LOGI(TAG, "State: WIFI_PROVISIONING");
             start_ap_mode(); // start AP mode so that user can enter the credentials through the web interface
             // start the locally deployed http server to allow the user to enter the credentials through the web interface
-            
             http_wifi_credentials_server_init();
             app_set_state(APP_STATE_RUNNING);
+            break;
         case APP_STATE_TELEMETRY_INIT:
             /* code */
             ESP_LOGI(TAG, "State: TELEMETRY_INIT");
-            app_set_state(APP_STATE_RUNNING);
+
+            if (telemetry_init() != ESP_OK)
+            {
+                ESP_LOGE(TAG, "Failed to initialize telemetry system");
+                vTaskDelay(pdMS_TO_TICKS(2000)); // wait for 1 second before restarting
+                app_set_state(APP_STATE_RESTART);
+            }
+            // telemetry_init(); // Initialize the telemetry system
+            else
+            {
+                app_set_state(APP_STATE_RUNNING);
+            }
+            break;
+        case APP_STATE_RESTART:
+            /* code */
+            ESP_LOGE(TAG, "State: RESTART");
+            esp_restart(); // restart the device
             break;
         case APP_STATE_RUNNING:
             /* code */

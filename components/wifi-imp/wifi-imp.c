@@ -48,35 +48,36 @@ static bool load_wifi_credentials(char* ssid, size_t ssid_len, char* pass, size_
     return (ret1 == ESP_OK && ret2 == ESP_OK);
 }
 
+
 esp_err_t save_wifi_credentials(const char* ssid, const char* pass)
 {
     nvs_handle_t nvs;
 
     esp_err_t ret = nvs_open("wifi", NVS_READWRITE, &nvs);
-    if (ret == ESP_OK)
-    {
-        esp_err_t ret2 = nvs_set_str(nvs, "ssid", ssid);
-        esp_err_t ret3 = nvs_set_str(nvs, "pass", pass);
-
-        if (ret2 == ESP_OK && ret3 == ESP_OK)
-        {
-            ESP_LOGI(TAG, "WiFi credentials saved successfully");
-            nvs_commit(nvs);
-            nvs_close(nvs);
-        }
-        else
-        {
-            ESP_LOGW(TAG, "Unable to save wifi credentials to NVS");
-            nvs_close(nvs);
-            return ret2;
-        }
-    }
-    else
-    {
-        ESP_LOGW(TAG, "Unable to open NVS : %d", ret);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to open Wi-Fi NVS: %s",
+                 esp_err_to_name(ret));
         return ret;
     }
 
+    ret = nvs_set_str(nvs, "ssid", ssid);
+    if (ret == ESP_OK) {
+        ret = nvs_set_str(nvs, "pass", pass);
+    }
+
+    if (ret == ESP_OK) {
+        ret = nvs_commit(nvs);
+    }
+
+    nvs_close(nvs);
+
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to save Wi-Fi credentials: %s",
+                 esp_err_to_name(ret));
+        return ret;
+    }
+
+    ESP_LOGI(TAG, "Wi-Fi credentials saved successfully");
     return ESP_OK;
 }
 
@@ -85,19 +86,27 @@ static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START){
         esp_wifi_connect();
     }
-    else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
-    {    
-        if (s_retry_num < WIFI_MAX_RETRIES_PRIV) 
-        {
+    
+    else if (event_base == WIFI_EVENT &&
+            event_id == WIFI_EVENT_STA_DISCONNECTED)
+    {
+        wifi_event_sta_disconnected_t *event =
+            (wifi_event_sta_disconnected_t *)event_data;
+
+        ESP_LOGW(TAG, "Wi-Fi disconnected. Reason code: %d",
+                event->reason);
+
+        if (s_retry_num < WIFI_MAX_RETRIES_PRIV) {
             s_retry_num++;
-            ESP_LOGI(TAG, "Retry %d / %d", s_retry_num, WIFI_MAX_RETRIES_PRIV);
+            ESP_LOGI(TAG, "Retry %d / %d",
+                    s_retry_num, WIFI_MAX_RETRIES_PRIV);
             esp_wifi_connect();
         } else {
             app_set_state(APP_STATE_WIFI_PROVISIONING);
             xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
         }
-        ESP_LOGI(TAG, "Connection to AP Failed");
     }
+
     else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP){
         ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
         ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));

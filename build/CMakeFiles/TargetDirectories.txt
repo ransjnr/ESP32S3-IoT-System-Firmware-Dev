@@ -883,6 +883,13 @@
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/http_imp/CMakeFiles/install.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/http_imp/CMakeFiles/install/local.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/http_imp/CMakeFiles/install/strip.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/__idf_telemetry.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/edit_cache.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/rebuild_cache.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/list_install_components.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/install.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/install/local.dir
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/CMakeFiles/install/strip.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/CMakeFiles/__idf_test_component.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/CMakeFiles/edit_cache.dir
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/CMakeFiles/rebuild_cache.dir

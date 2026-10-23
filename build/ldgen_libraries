@@ -166,4 +166,5 @@
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/main/libmain.a
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/http_imp/libhttp_imp.a
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/wifi-imp/libwifi-imp.a
+/home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/telemetry/libtelemetry.a
 /home/r26oppon/Iot_course/esp32_firmware/build/esp-idf/test_component/libtest_component.a
