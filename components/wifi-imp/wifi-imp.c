@@ -10,7 +10,10 @@
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
-#include "app_state.h"
+#include "app_state.h" // for signing the top level state machine
+
+#include "nvs.h" // for saving the wifi credentials
+
 
 static EventGroupHandle_t s_wifi_event_group;
 
@@ -24,6 +27,58 @@ static const char* TAG = "wifi";
 #define WIFI_PASS_PRIV "LvNNMOJk"
 
 static int s_retry_num = 0;
+
+static char ssid[32] = {0};
+static char pass[64] = {0};
+
+static bool load_wifi_credentials(char* ssid, size_t ssid_len, char* pass, size_t pass_len)
+{
+    nvs_handle nvs;
+
+    if (nvs_open("wifi", NVS_READONLY, &nvs) != ESP_OK)
+    {
+        return false;
+    }
+
+    esp_err_t ret1 = nvs_get_str(nvs, "ssid", ssid, &ssid_len);
+    esp_err_t ret2 = nvs_get_str(nvs, "pass", pass, &pass_len);
+
+    nvs_close(nvs);
+
+    return (ret1 == ESP_OK && ret2 == ESP_OK);
+}
+
+esp_err_t save_wifi_credentials(const char* ssid, const char* pass)
+{
+    nvs_handle_t nvs;
+
+    esp_err_t ret = nvs_open("wifi", NVS_READWRITE, &nvs);
+    if (ret == ESP_OK)
+    {
+        esp_err_t ret2 = nvs_set_str(nvs, "ssid", ssid);
+        esp_err_t ret3 = nvs_set_str(nvs, "pass", pass);
+
+        if (ret2 == ESP_OK && ret3 == ESP_OK)
+        {
+            ESP_LOGI(TAG, "WiFi credentials saved successfully");
+            nvs_commit(nvs);
+            nvs_close(nvs);
+        }
+        else
+        {
+            ESP_LOGW(TAG, "Unable to save wifi credentials to NVS");
+            nvs_close(nvs);
+            return ret2;
+        }
+    }
+    else
+    {
+        ESP_LOGW(TAG, "Unable to open NVS : %d", ret);
+        return ret;
+    }
+
+    return ESP_OK;
+}
 
 static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
 {
@@ -52,7 +107,7 @@ static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_
     }
 }
 
-void wifi_init_station(void)
+void wifi_init(void)
 {
     s_wifi_event_group = xEventGroupCreate();
 
@@ -65,6 +120,47 @@ void wifi_init_station(void)
 
     ESP_LOGI(TAG, "Wifi setting initialized");
 
+    bool creds_loaded = load_wifi_credentials(ssid, sizeof(ssid), pass, sizeof(pass));
+
+    if (creds_loaded)
+    {
+        // start in station mode
+        ESP_LOGI(TAG, "Wifi Credentials Loaded from NVS");
+        app_set_state(APP_STATE_WIFI_FROM_NVS);
+    }
+    else
+    {
+        // start in AP mode
+        ESP_LOGW(TAG, "No Credentials found. Starting in AP mode");
+        app_set_state(APP_STATE_WIFI_PROVISIONING);
+    }
+}
+
+void start_ap_mode(void)
+{
+    esp_netif_create_default_wifi_ap();
+    esp_wifi_restore(); //clear STA config to avoid auto connecting with empty credentials
+
+    wifi_config_t ap_config = {
+        .ap = {
+            .ssid = "ESP32_Setup",
+            .ssid_len = strlen("ESP32_Setup"),
+            .password = "12345678",
+            .max_connection = 2,
+            .authmode = WIFI_AUTH_WPA_WPA2_PSK
+        }
+    };
+
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &ap_config));
+    ESP_ERROR_CHECK(esp_wifi_start());
+}
+
+void wifi_init_station(void)
+{
+
+
+
     esp_event_handler_instance_t instance_any_id;
     esp_event_handler_instance_t instance_got_ip;
 
@@ -76,8 +172,8 @@ void wifi_init_station(void)
             .threshold.authmode = WIFI_AUTH_WPA_WPA2_PSK,
             .failure_retry_cnt = WIFI_MAX_RETRIES_PRIV,
             .sae_pwe_h2e = WPA3_SAE_PWE_BOTH,
-            .ssid = WIFI_SSID_PRIV,
-            .password = WIFI_PASS_PRIV
+            .ssid = ssid,
+            .password = pass
         }
     };
 
