@@ -265,6 +265,11 @@ static esp_err_t wifi_post_handler(httpd_req_t* req)
         return ESP_FAIL;
     }
     ESP_LOGI(TAG, "Provisioning Data validated, Saving credentials to NVS");
+    ESP_LOGI(TAG, "SSID : %s", ssid);
+    ESP_LOGI(TAG, "Password : %s", pass);
+    ESP_LOGI(TAG, "HTTP Username : %s", http_user);
+    ESP_LOGI(TAG, "HTTP Password : %s", http_pass);
+
     save_wifi_credentials(ssid, pass); // save wifi credentials to NVS
     // We also need to save HTTP credentials to NVS
     save_http_credentials(http_user, http_pass);

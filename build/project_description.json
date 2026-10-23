@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "esp32_firmware",
-    "project_version":    "d482e88-dirty",
+    "project_version":    "d8e9c02-dirty",
     "project_path":       "/home/r26oppon/Iot_course/esp32_firmware",
     "idf_path":           "/home/r26oppon/.espressif/v5.5.6/esp-idf",
     "build_dir":          "/home/r26oppon/Iot_course/esp32_firmware/build",
