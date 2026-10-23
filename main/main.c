@@ -31,9 +31,20 @@ void app_main(void)
             break;
         case APP_STATE_WIFI_CONNECT:
             /* code */
-            wifi_init_station();
+            wifi_init(); // initialize the wifi module and allow the firmware to check for the credentials in the NVS
+            break;
+        case APP_STATE_WIFI_FROM_NVS:
+            /* code */
+            ESP_LOGI(TAG, "State: WIFI_FROM_NVS");
+            wifi_init_station(); // initialize the wifi module in station mode
             app_set_state(APP_STATE_RUNNING);
             break;
+        case APP_STATE_WIFI_PROVISIONING:
+            /* code */
+            ESP_LOGI(TAG, "State: WIFI_PROVISIONING");
+            start_ap_mode(); // start AP mode so that user can enter the credentials through the web interface
+            // start the locally deployed http server to allow the user to enter the credentials through the web interface
+            app_set_state(APP_STATE_RUNNING);
         case APP_STATE_TELEMETRY_INIT:
             /* code */
             ESP_LOGI(TAG, "State: TELEMETRY_INIT");

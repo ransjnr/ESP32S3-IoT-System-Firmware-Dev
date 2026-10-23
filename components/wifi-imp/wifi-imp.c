@@ -171,11 +171,11 @@ void wifi_init_station(void)
         .sta = {
             .threshold.authmode = WIFI_AUTH_WPA_WPA2_PSK,
             .failure_retry_cnt = WIFI_MAX_RETRIES_PRIV,
-            .sae_pwe_h2e = WPA3_SAE_PWE_BOTH,
-            .ssid = ssid,
-            .password = pass
+            .sae_pwe_h2e = WPA3_SAE_PWE_BOTH
         }
     };
+    strncpy((char*)wifi_config.sta.ssid, ssid, sizeof(wifi_config.sta.ssid));
+    strncpy((char*)wifi_config.sta.password, pass, sizeof(wifi_config.sta.password));
 
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));

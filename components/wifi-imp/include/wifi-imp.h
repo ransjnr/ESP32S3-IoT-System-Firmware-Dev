@@ -1,6 +1,8 @@
 #ifndef WIFI_IMP_H
 #define WIFI_IMP_H
 
+#include "esp_err.h"
+
 void wifi_init(void);
 
 void wifi_init_station(void);
